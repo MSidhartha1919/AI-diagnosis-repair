@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: repairmate-diagnosis-agent
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /health
+    envVars:
+      - key: GeminiAPIKey
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
